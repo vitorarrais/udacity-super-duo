@@ -1,4 +1,4 @@
-package it.jaschke.alexandria;
+package it.jaschke.alexandria.drawer;
 
 /**
  * Created by Vitor on 27/01/2016.

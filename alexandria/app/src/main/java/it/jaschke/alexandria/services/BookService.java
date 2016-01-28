@@ -79,6 +79,7 @@ public class BookService extends IntentService {
     private void fetchBook(String ean) {
 
         if(ean.length()!=13){
+            Toast.makeText(BookService.this, "ISBN-13 must contain 13 numbers", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -137,7 +138,7 @@ public class BookService extends IntentService {
 
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error ", e);
-            
+
             if (isNetworkAvailable()){
                 Toast.makeText(BookService.this, "Sorry, an error has occurred", Toast.LENGTH_SHORT).show();
             } else {
