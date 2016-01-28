@@ -2,11 +2,15 @@ package it.jaschke.alexandria.services;
 
 import android.app.IntentService;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +41,8 @@ public class BookService extends IntentService {
     public static final String DELETE_BOOK = "it.jaschke.alexandria.services.action.DELETE_BOOK";
 
     public static final String EAN = "it.jaschke.alexandria.services.extra.EAN";
+
+    protected boolean isError = false;
 
     public BookService() {
         super("Alexandria");
@@ -128,8 +134,17 @@ public class BookService extends IntentService {
                 return;
             }
             bookJsonString = buffer.toString();
+
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error ", e);
+            
+            if (isNetworkAvailable()){
+                Toast.makeText(BookService.this, "Sorry, an error has occurred", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(BookService.this, "Check your device network", Toast.LENGTH_SHORT).show();
+            }
+
+            isError = true;
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -140,6 +155,12 @@ public class BookService extends IntentService {
                 } catch (final IOException e) {
                     Log.e(LOG_TAG, "Error closing stream", e);
                 }
+            }
+
+            // prevent to continue
+            if (isError){
+                isError = false;
+                return;
             }
 
         }
@@ -229,5 +250,12 @@ public class BookService extends IntentService {
             getContentResolver().insert(AlexandriaContract.CategoryEntry.CONTENT_URI, values);
             values= new ContentValues();
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
  }
