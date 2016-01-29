@@ -1,4 +1,4 @@
-package it.jaschke.alexandria.drawer;
+package it.jaschke.alexandria.activity.drawer;
 
 import android.app.Activity;
 import android.content.Context;

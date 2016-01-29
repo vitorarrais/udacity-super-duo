@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package it.jaschke.alexandria;
+package it.jaschke.alexandria.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.scan.BarcodeCaptureActivity;
 
 

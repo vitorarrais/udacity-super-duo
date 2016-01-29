@@ -1,4 +1,4 @@
-package it.jaschke.alexandria;
+package it.jaschke.alexandria.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -17,8 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import it.jaschke.alexandria.activity.fragment.AboutFragment;
+import it.jaschke.alexandria.activity.fragment.AddBookFragment;
+import it.jaschke.alexandria.activity.fragment.BookDetailFragment;
+import it.jaschke.alexandria.activity.fragment.ListOfBooksFragment;
+import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.api.Callback;
-import it.jaschke.alexandria.drawer.DrawerFragment;
+import it.jaschke.alexandria.activity.drawer.DrawerFragment;
 
 
 public class MainActivity extends ActionBarActivity implements DrawerFragment.NavigationDrawerCallbacks, Callback {
@@ -72,13 +77,13 @@ public class MainActivity extends ActionBarActivity implements DrawerFragment.Na
         switch (position){
             default:
             case 0:
-                nextFragment = new ListOfBooks();
+                nextFragment = new ListOfBooksFragment();
                 break;
             case 1:
-                nextFragment = new AddBook();
+                nextFragment = new AddBookFragment();
                 break;
             case 2:
-                nextFragment = new About();
+                nextFragment = new AboutFragment();
                 break;
 
         }
@@ -138,9 +143,9 @@ public class MainActivity extends ActionBarActivity implements DrawerFragment.Na
     @Override
     public void onItemSelected(String ean) {
         Bundle args = new Bundle();
-        args.putString(BookDetail.EAN_KEY, ean);
+        args.putString(BookDetailFragment.EAN_KEY, ean);
 
-        BookDetail fragment = new BookDetail();
+        BookDetailFragment fragment = new BookDetailFragment();
         fragment.setArguments(args);
 
         int id = R.id.container;

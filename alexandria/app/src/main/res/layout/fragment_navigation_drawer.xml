@@ -6,4 +6,4 @@
     android:choiceMode="singleChoice"
     android:divider="@color/colorDivider"
     android:dividerHeight="0dp"
-    tools:context=".drawer.DrawerFragment" />
+    tools:context=".activity.drawer.DrawerFragment" />

@@ -1,4 +1,4 @@
-package it.jaschke.alexandria.drawer;
+package it.jaschke.alexandria.activity.drawer;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -104,7 +104,7 @@ public class DrawerFragment extends Fragment {
 
         DrawerItem items[] = new DrawerItem[]{
                 new DrawerItem(R.drawable.ic_list_white_36dp, getString(R.string.books)),
-                new DrawerItem(R.drawable.ic_library_books_white_36dp, getString(R.string.scan)),
+                new DrawerItem(R.drawable.ic_add_white_36dp, getString(R.string.scan)),
                 new DrawerItem(R.drawable.ic_help_outline_white_36dp, getString(R.string.about))
         };
 
